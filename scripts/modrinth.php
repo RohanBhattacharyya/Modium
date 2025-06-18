@@ -4,16 +4,18 @@ $modName = $_GET['name'] ?? "";
 $modLoader = explode(",",$_GET['loader']);
 $modVersion = $_GET['version'];
 
-require 'mod.php';
-require '../vendor/autoload.php';
+require_once 'mod.php';
+require_once '../vendor/autoload.php';
 
 use GuzzleHttp\Client;
 
 
+function modrinth($modName, $modLoader, $modVersion){
+
 
 $client = new Client();
 
-$res = $client->request('GET', "https://api.modrinth.com/v2/search?string=$modName", [
+$res = $client->request('GET', "https://api.modrinth.com/v2/search?query=$modName&facets=[[\"project_type:mod\"]]&index=downloads", [
     'auth' => ['user', 'pass']
 ]);
 
@@ -30,6 +32,8 @@ foreach ($mods->hits as $key => $mod) {
     $allTheMods[] = $workingMod;
 }
 
-echo json_encode($allTheMods, JSON_UNESCAPED_SLASHES);
+return $allTheMods;
 
-?>
+}
+
+// modrinth($modName, $modLoader, $modVersion);

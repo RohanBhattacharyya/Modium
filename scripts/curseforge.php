@@ -1,7 +1,7 @@
 <?php 
 
-require '../vendor/autoload.php';
-require 'mod.php';
+require_once '../vendor/autoload.php';
+require_once 'mod.php';
 
 use GuzzleHttp\Client;
 
@@ -12,9 +12,11 @@ $modName = $_GET['name'] ?? "";
 $modLoader = explode(",",$_GET['loader']);
 $modVersion = $_GET['version'];
 
+function curseforge ($modName, $modLoader, $modVersion){
 
 
-$client = new Client([
+
+$client = new Client(config: [
     'base_uri' => 'https://www.curseforge.com',
     'headers' => [
         'User-Agent' => 'Mozilla/5.0 (X11; Linux x86_64; rv:139.0) Gecko/20100101 Firefox/139.0',
@@ -83,4 +85,8 @@ foreach($mods as $key => $mod){
 }
 
 
-echo json_encode($allTheMods, JSON_UNESCAPED_SLASHES);
+return $allTheMods;
+
+}
+
+// curseforge($modName, $modLoader, $modVersion);

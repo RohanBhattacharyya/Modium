@@ -6,7 +6,7 @@
         json.forEach(mod => {
             toAdd += `
                 <h2><a target="_blank" href=${mod.link}>${mod.name}</a></h2>
-                <img src="${mod.art}">
+                <img height=200px src="${mod.art}">
                 <p>${mod.description}</p>
                 <hr>
             `;
@@ -15,7 +15,7 @@
     }
     function fetchJSON(name){
         name = encodeURIComponent(name);
-        fetch(`scripts/curseforge.php?name=${name}`)
+        fetch(`scripts/unified.php?name=${name}`)
             .then(response => response.json())
             .then(data => {
                 displayMods(data);
