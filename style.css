@@ -2,9 +2,11 @@ body {
     background-color: rgb(12, 12, 12);
     color: aliceblue;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    max-width: 30vw;
     margin-left: 2vw;
-
+    
+}
+main {
+    max-width: 30vw;
 }
 img {
     border-radius: 10px;
@@ -16,6 +18,12 @@ a {
 }
 h1{
     font-size: 3rem;
+    font-weight: 800;
+}
+
+.modium {
+    font-size: 10rem;
+    text-align: center;
 }
 
 h2 {

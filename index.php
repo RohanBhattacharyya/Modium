@@ -8,6 +8,7 @@
     <script>
     function displayMods(json){
         mods.innerHTML = "";
+        json.sort((a,b) => b.downloads - a.downloads);
         json.forEach(mod => {
             toAdd = `
                 <h2><a target="_blank" href=${mod.link[0]}>${mod.name}</a></h2>
@@ -47,13 +48,25 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Modium</h1>
-    <input id="search" type="text">
-
-    <button onclick="fetchJSON(`${search.value}`)">Search</button>
-    <div id="mods">
-
-    </div>
+    <header>
+        <h1 class="modium">Modium</h1>
+        <span>
+            <input id="search" type="text">
+            <button onclick="fetchJSON(search.value)">Search</button>
+        </span>
+        <script>
+            document.querySelector("#search").addEventListener("keyup", function(event) {
+                if (event.key === "Enter") {
+                    fetchJSON(search.value);
+                }
+            })
+        </script>
+    </header>
+    <main>
+        <div id="mods">
+    
+        </div>
+    </main>
 </body>
 </html>
 

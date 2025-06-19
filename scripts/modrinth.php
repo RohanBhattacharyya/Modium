@@ -15,7 +15,20 @@ function modrinth($modName, $modLoader, $modVersion){
 
 $client = new Client();
 
-$res = $client->request('GET', "https://api.modrinth.com/v2/search?query=$modName&facets=[[\"project_type:mod\"]]&index=downloads", [
+$loaderString = "[";
+
+foreach ($modLoader as $key => $loader) {
+    if ($loader === null || $loader === ""){
+        continue;
+    }
+    $loaderString .= "\"categories: $loader\",";
+}
+
+$loaderString = rtrim($loaderString, ",");
+$loaderString .= "]";
+
+$uri = "https://api.modrinth.com/v2/search?query=$modName&facets=[[\"project_type:mod\"]" . (($loaderString === "[]") ? "" : ',' . $loaderString) . "]&index=downloads";
+$res = $client->request('GET', $uri, [
     'auth' => ['user', 'pass']
 ]);
 
@@ -33,6 +46,7 @@ foreach ($mods->hits as $key => $mod) {
     $allTheMods[] = $workingMod;
 }
 
+// echo var_dump($allTheMods);
 return $allTheMods;
 
 }
