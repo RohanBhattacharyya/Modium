@@ -2,17 +2,18 @@
 <input id="search" type="text">
 <script>
     function displayMods(json){
-        toAdd = ""
+        mods.innerHTML = "";
         json.forEach(mod => {
-            toAdd += `
+            toAdd = `
                 <h2><a target="_blank" href=${mod.link}>${mod.name}</a></h2>
                 <img height=200px src="${mod.art}">
                 <p>${mod.description}</p>
                 <hr>
             `;
+            mods.innerHTML+= toAdd;
         });
-        document.body.innerHTML += toAdd;
     }
+
     function fetchJSON(name){
         name = encodeURIComponent(name);
         fetch(`scripts/unified.php?name=${name}`)
@@ -24,3 +25,6 @@
     }
 </script>
 <button onclick="fetchJSON(`${search.value}`)">Search</button>
+<div id="mods">
+
+</div>

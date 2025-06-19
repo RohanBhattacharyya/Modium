@@ -15,15 +15,29 @@ $modrinthresults = modrinth($modName, $modLoader, $modVersion);
 
 $allTheMods = [];
 
-foreach ($curseforgeresults as $key => $value) {
-    global $allTheMods;
-    $allTheMods[] = $value;
-}
+
 foreach ($modrinthresults as $key => $value) {
     global $allTheMods;
     $allTheMods[] = $value;
 }
+foreach ($curseforgeresults as $key => $value) {
+    global $allTheMods;
+    $allTheMods[] = $value;
+}
 
-echo json_encode($allTheMods);
+// Check for duplicates and remove
+$nameCounts = [];
+
+foreach ($allTheMods as $key => $mod) {
+    $nameCounts[$mod->name][] = $key;
+}
+
+
+$allTheMods2 = [];
+foreach ($nameCounts as $name => $keys) {
+    $allTheMods2[] = $allTheMods[$keys[0]];
+}
+
+echo json_encode($allTheMods2);
 
 ?>
