@@ -5,4 +5,5 @@ class Mod {
     public $description;
     public $art;
     public $link;
+    public $downloads;
 }

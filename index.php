@@ -24,7 +24,7 @@
                 }
                 )()
                 }
-                
+                <p>All Sites Downloads (apprx): ${(mod.downloads).toLocaleString('en-US')}</p>
                 <br>
                 <img height=200px src="${mod.art}">
                 <p>${mod.description}</p>

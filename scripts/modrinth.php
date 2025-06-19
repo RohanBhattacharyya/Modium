@@ -29,6 +29,7 @@ foreach ($mods->hits as $key => $mod) {
     $workingMod->art = $mod->icon_url;
     $workingMod->description = $mod->description;
     $workingMod->link = "https://modrinth.com/mod/" . $mod->slug;
+    $workingMod->downloads = (int)$mod->downloads;
     $allTheMods[] = $workingMod;
 }
 

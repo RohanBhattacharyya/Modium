@@ -82,6 +82,12 @@ foreach($mods as $key => $mod){
     $workingMod->description = $mod->querySelector('.description')->innerHTML;
     $workingMod->art = $mod->querySelector('.art')->querySelector('img')->getAttribute('src');
     $workingMod->link = "https://www.curseforge.com" . $mod->querySelector('.name')->getAttribute('href');
+
+
+    $downloads = $mod->querySelector('.details-list')->querySelector('.detail-downloads')->textContent;
+    $letter = substr($downloads, -1);
+    $downloads = $letter === "M" ? (float)substr($downloads, 0, -1)*1000000 : ($letter === "K" ? (float)substr($downloads, 0, -1)*1000 : (int)$downloads);
+    $workingMod->downloads = $downloads;
     $allTheMods[] = $workingMod;
 }
 

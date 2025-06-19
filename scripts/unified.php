@@ -37,8 +37,10 @@ $allTheMods2 = [];
 foreach ($nameCounts as $name => $keys) {
     $newMod = clone $allTheMods[$keys[0]];
     $newMod->link = [];
+    $newMod->downloads = 0;
     foreach($keys as $key => $index){
         $newMod->link[]=$allTheMods[$index]->link;
+        $newMod->downloads+=$allTheMods[$index]->downloads;
     }
     $allTheMods2[] = $newMod;
 }
