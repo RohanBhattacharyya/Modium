@@ -48,6 +48,7 @@ $query = [
     'pageSize' => '20',
     'sortBy' => 'total downloads',
     'search' => $modName,
+    'class' => 'mc-mods'
 ];
 
 if (isset($modLoader) && is_array($modLoader) && count($modLoader) > 0) {
