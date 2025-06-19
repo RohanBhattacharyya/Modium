@@ -1,11 +1,31 @@
-<h1>Modium</h1>
-<input id="search" type="text">
-<script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modium</title>
+
+    <script>
     function displayMods(json){
         mods.innerHTML = "";
         json.forEach(mod => {
             toAdd = `
-                <h2><a target="_blank" href=${mod.link}>${mod.name}</a></h2>
+                <h2><a target="_blank" href=${mod.link[0]}>${mod.name}</a></h2>
+                ${(()=>{
+                    toAdd = "";
+                    mod.link.forEach(thing => {
+                        toAdd += `
+                        <a href="${thing}" target="_blank"><img style="height: 1.5rem" src="${thing.includes("modrinth.com") ? "images/modrinth.ico" : "images/curseforge.ico"}"></a>
+                        `;
+                        console.log(thing);
+                        console.log(thing.includes("modrinth.com"));
+                    });
+                    return toAdd;
+                }
+                )()
+                }
+                
+                <br>
                 <img height=200px src="${mod.art}">
                 <p>${mod.description}</p>
                 <hr>
@@ -13,7 +33,6 @@
             mods.innerHTML+= toAdd;
         });
     }
-
     function fetchJSON(name){
         name = encodeURIComponent(name);
         fetch(`scripts/unified.php?name=${name}`)
@@ -24,7 +43,17 @@
         ;
     }
 </script>
-<button onclick="fetchJSON(`${search.value}`)">Search</button>
-<div id="mods">
 
-</div>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Modium</h1>
+    <input id="search" type="text">
+
+    <button onclick="fetchJSON(`${search.value}`)">Search</button>
+    <div id="mods">
+
+    </div>
+</body>
+</html>
+

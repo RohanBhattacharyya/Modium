@@ -35,7 +35,12 @@ foreach ($allTheMods as $key => $mod) {
 
 $allTheMods2 = [];
 foreach ($nameCounts as $name => $keys) {
-    $allTheMods2[] = $allTheMods[$keys[0]];
+    $newMod = clone $allTheMods[$keys[0]];
+    $newMod->link = [];
+    foreach($keys as $key => $index){
+        $newMod->link[]=$allTheMods[$index]->link;
+    }
+    $allTheMods2[] = $newMod;
 }
 
 echo json_encode($allTheMods2);
